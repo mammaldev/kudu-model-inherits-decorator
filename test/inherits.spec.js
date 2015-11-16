@@ -72,6 +72,14 @@ describe('Decorator', () => {
       });
     });
 
+    it('should not affect the superclass schema', () => {
+      expect(Base.schema.properties).to.deep.equal({
+        base: {
+          type: Boolean,
+        },
+      });
+    });
+
     it('should add superclass hooks to the subclass when the subclass has none', () => {
       expect(Model.schema.hooks).to.have.property('onCreate');
     });

@@ -33,6 +33,7 @@ export default function inherits( Model ) {
     }
 
     Model.schema.properties = Object.assign(
+      {},
       ctor.schema.properties,
       Model.schema.properties
     );
