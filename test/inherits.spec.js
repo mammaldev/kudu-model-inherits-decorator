@@ -38,6 +38,11 @@ describe('Decorator', () => {
               type: Boolean,
             },
           },
+          relationships: {
+            relation: {
+              type: 'relation',
+            },
+          },
           hooks: {
             onCreate() {
               this.base = true;
@@ -51,6 +56,11 @@ describe('Decorator', () => {
           properties: {
             test: {
               type: String,
+            },
+          },
+          relationships: {
+            child: {
+              type: 'child',
             },
           },
         }
@@ -72,11 +82,24 @@ describe('Decorator', () => {
       });
     });
 
+    it('should merge the superclass relationships with the subclass relationships', () => {
+      expect(Model.schema.relationships).to.deep.equal({
+        relation: { type: 'relation' },
+        child: { type: 'child' },
+      });
+    });
+
     it('should not affect the superclass schema', () => {
       expect(Base.schema.properties).to.deep.equal({
         base: {
           type: Boolean,
         },
+      });
+    });
+
+    it('should not affect the superclass relationships', () => {
+      expect(Base.schema.relationships).to.deep.equal({
+        relation: { type: 'relation' },
       });
     });
 

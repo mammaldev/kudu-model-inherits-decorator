@@ -1,9 +1,15 @@
 // Decorate a Kudu model constructor with a static "inherits" method. The
-// method merges the "properties" of the two schemas with the subclass taking
-// precedence in the case where both schemas define a property with the same
-// name. The method also merges any "hooks" defined on the schemas. If hook
-// functions for the same event are defined on both schemas the functions are
-// pushed into an array with those defined on the superclass taking precedence.
+// method merges:
+//
+// - The "properties" of the two schemas with the subclass taking precedence in
+//   the case where both schemas define a property with the same name.
+//
+// - The "relationships" of the two schemas with the subclass taking precedence
+//   in the case where both schemas define a relationship with the same name.
+//
+// - Any "hooks" defined on the schemas. If hook functions for the same event
+//   are defined on both schemas the functions are pushed into an array with
+//   with those defined on the superclass taking precedence.
 //
 // Usage:
 //
@@ -36,6 +42,12 @@ export default function inherits( Model ) {
       {},
       ctor.schema.properties,
       Model.schema.properties
+    );
+
+    Model.schema.relationships = Object.assign(
+      {},
+      ctor.schema.relationships,
+      Model.schema.relationships,
     );
 
     // Subclass model constructors also inherit hook functions. In cases where
