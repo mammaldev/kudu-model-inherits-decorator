@@ -47,7 +47,7 @@ export default function inherits( Model ) {
     Model.schema.relationships = Object.assign(
       {},
       ctor.schema.relationships,
-      Model.schema.relationships,
+      Model.schema.relationships
     );
 
     // Subclass model constructors also inherit hook functions. In cases where

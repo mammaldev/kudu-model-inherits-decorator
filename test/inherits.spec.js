@@ -48,7 +48,7 @@ describe('Decorator', () => {
               this.base = true;
             },
           },
-        }
+        };
       };
 
       Model = class {
@@ -63,7 +63,7 @@ describe('Decorator', () => {
               type: 'child',
             },
           },
-        }
+        };
       };
 
       decorate(Model);
@@ -116,7 +116,7 @@ describe('Decorator', () => {
               this.sup = 1;
             },
           },
-        }
+        };
       };
       let Model = class {
         static schema = {
@@ -126,7 +126,7 @@ describe('Decorator', () => {
               this.sub = 1;
             },
           },
-        }
+        };
       };
       decorate(Model);
       Model.inherits(Base);
